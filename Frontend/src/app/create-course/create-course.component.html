@@ -1,0 +1,231 @@
+<h2 class="form-title">Create new course</h2>
+
+<form #form="ngForm">
+  <div class="form-group">
+    <label>course name: </label>
+    <input
+      type="text"
+      class="form-control"
+      id="courseName"
+      [(ngModel)]="obj.courseName"
+      #courseName="ngModel"
+      required
+      name="courseName"
+      minlength="1"
+      maxlength="50"
+      [class.is-invalid]="
+        courseName.invalid && (courseName.dirty || courseName.touched)
+      "
+    />
+
+    <div
+      *ngIf="courseName.invalid && (courseName.dirty || courseName.touched)"
+      class="invalid-feedback"
+    >
+      <div *ngIf="courseName.errors?.['required']">This field is required.</div>
+      <div *ngIf="courseName.errors?.['minlength']">
+        This field must have at least 1 character.
+      </div>
+      <div *ngIf="courseName.errors?.['maxlength']">
+        This field must have at most 50 characters.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>course description: </label>
+    <input
+      type="text"
+      class="form-control"
+      id="courseDescription"
+      [(ngModel)]="obj.description"
+      name="courseDescription"
+      #description="ngModel"
+      required
+      minlength="1"
+      maxlength="50"
+      [class.is-invalid]="
+        description.invalid && (description.dirty || description.touched)
+      "
+    />
+
+    <div
+      *ngIf="description.invalid && (description.dirty || description.touched)"
+      class="invalid-feedback"
+    >
+      <div *ngIf="description.errors?.['required']">
+        This field is required.
+      </div>
+      <div *ngIf="description.errors?.['minlength']">
+        This field must have at least 1 character.
+      </div>
+      <div *ngIf="description.errors?.['maxlength']">
+        This field must have at most 50 characters.
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <select
+      id="second"
+      class="tickets-form-selector"
+      [(ngModel)]="obj.teacherName"
+      [ngModelOptions]="{ standalone: true }"
+      name="teacherName"
+      #teacherName="ngModel"
+      required
+      [class.is-invalid]="
+        teacherName.invalid && (teacherName.dirty || teacherName.touched)
+      "
+    >
+      <option value="">Выберите преподавателя</option>
+      <option *ngFor="let te of teachers" [ngValue]="te">
+        {{ te }}
+      </option>
+    </select>
+
+    <div
+      *ngIf="teacherName.invalid && (teacherName.dirty || teacherName.touched)"
+      class="invalid-feedback"
+    >
+      <div *ngIf="teacherName.errors?.['required']">
+        This field is required.
+      </div>
+      <div *ngIf="teacherName.errors?.['minlength']">
+        This field must have at least 1 character.
+      </div>
+      <div *ngIf="teacherName.errors?.['maxlength']">
+        This field must have at most 50 characters.
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p>дата старта курсов</p>
+    <input
+      class="tickets-form-selector"
+      type="date"
+      [ngModel]="obj.startOfCourses"
+      (change)="onChangeDateStart(obj.startOfCourses)"
+      (ngModelChange)="obj.startOfCourses = $event"
+      name="startOfCourses"
+      #startOfCourses="ngModel"
+      required
+      [class.is-invalid]="
+        startOfCourses.invalid &&
+        (startOfCourses.dirty || startOfCourses.touched)
+      "
+    />
+
+    <div
+      *ngIf="
+        startOfCourses.invalid &&
+        (startOfCourses.dirty || startOfCourses.touched)
+      "
+      class="invalid-feedback"
+    >
+      <div *ngIf="startOfCourses.errors?.['required']">
+        This field is required.
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p>дата окончания курсов</p>
+    <input
+      class="tickets-form-selector"
+      type="date"
+      [ngModel]="obj.endOfCourses"
+      (change)="onChangeDateEnd(obj.endOfCourses)"
+      (ngModelChange)="obj.endOfCourses = $event"
+      name="endOfCourses"
+      #endOfCourses="ngModel"
+      required
+      [class.is-invalid]="
+        endOfCourses.invalid && (endOfCourses.dirty || endOfCourses.touched)
+      "
+    />
+
+    <div
+      *ngIf="
+        endOfCourses.invalid && (endOfCourses.dirty || endOfCourses.touched)
+      "
+      class="invalid-feedback"
+    >
+      <div *ngIf="endOfCourses.errors?.['required']">
+        This field is required.
+      </div>
+    </div>
+  </div>
+</form>
+
+<p>поиск тем занятий</p>
+<input
+  type="text"
+  [(ngModel)]="topicPattern"
+  (change)="onChangePattern(topicPattern)"
+/>
+<p>выбор из найденых</p>
+<select
+  id="second"
+  class="tickets-form-selector"
+  [(ngModel)]="selectTopic"
+  (change)="onChangeTopic(selectTopic)"
+>
+  <option value="Выберите тему занятия">Выберите тему занятия</option>
+  <option *ngFor="let topic of loadTopic">
+    {{ topic }}
+  </option>
+</select>
+
+<button (click)="addTopic()" class="btn btn-info">add topic</button>
+
+<div class="status-message" style="color: red" *ngIf="err">{{ err }}</div>
+
+<div>
+  <p>create and add new topic</p>
+
+  <input type="text" [(ngModel)]="newTopic" />
+
+  <div>
+
+  </div>
+  <button (click)="createNewTopic()" class="btn btn-info">
+    add new topic
+  </button>
+  <div *ngIf="errorCreateNewTopic" style="color: red"> {{errorCreateNewTopic}} </div>
+  <div *ngIf="createMessage" style="color: green" class="status-message">{{ createMessage }}</div>
+</div>
+
+<table class="table table-striped form-table" border="1">
+  <thead>
+    <tr>
+      <td>#</td>
+      <th>topic name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let topic of addedTopic">
+      <td class="count"></td>
+      <td>{{ topic }}</td>
+      <td>
+        <button (click)="deleteTopic(topic)" class="btn btn-info">
+          delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="status-message"
+  style="color: green"
+  *ngIf="!errorDescription; else elseBlock"
+>
+  {{ message }}
+</div>
+<ng-template class="status-message" style="color: red" #elseBlock
+  >{{ message }}: {{ errorDescription }}</ng-template
+>
+
+<button (click)="onChangeCourse(form)" class="btn btn-info">Create course</button>

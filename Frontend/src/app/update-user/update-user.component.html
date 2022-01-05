@@ -1,0 +1,43 @@
+<h2>Update user</h2>
+<div style="color : red" *ngIf='error'>{{error}}</div>
+
+<form class="user-edit-form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group user-edit-form-field">
+        <label>First name: </label>
+        <input type="text" class="form-control" id="firstName"
+        [(ngModel)]="user.firstName" name="firstName">
+    </div>
+    
+    <div class="form-group user-edit-form-field">
+        <label>Last name: </label>
+        <input type="text" class="form-control" id="lastName"
+        [(ngModel)]="user.lastName" name="lastName">
+    </div>
+
+    <div class="form-group user-edit-form-field">
+        <label>Email: </label>
+        <input type="text" class="form-control" id="email"
+        [(ngModel)]="user.email" name="email">
+    </div>
+
+    <div class="form-group user-edit-form-field">
+        <label>Phone: </label>
+        <input type="text" class="form-control" maxlength="9" id="phone"
+        [(ngModel)]="user.phone" name="phone">
+    </div>
+
+    <div class="form-group user-edit-form-field">
+        <label>Admin  </label>
+        <input type="checkbox" [checked]="adminAfter" (change)="adminAfter=!adminAfter">
+    </div>
+
+    <div class="form-group user-edit-form-field">
+        <label>Teacher  </label>
+        <input type="checkbox" [checked]="teacherAfter" (change)="teacherAfter=!teacherAfter">
+    </div>
+
+    <button class="btn btn-info" type="submit">submit</button>
+    <button mat-raised-button (click)="goToUserList()" class="btn btn-info">user list</button>
+</form>
+

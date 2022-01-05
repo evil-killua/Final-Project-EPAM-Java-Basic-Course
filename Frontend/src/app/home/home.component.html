@@ -1,0 +1,30 @@
+<div class="content-container" *ngIf="isSignedin">
+
+    <p class="greeting">Welcome back, {{ signedinUser }}!</p> 
+
+
+    <p class="main-menu-point" (click)="getCourse()">
+        <a class="main-menu-point-label fit-container">courses</a>
+    </p>
+
+    <p class="main-menu-point" (click)="getUserCourse()">
+        <a class="main-menu-point-label fit-container">view user course</a>
+    </p>
+
+    <p class="main-menu-point" [hidden]="!this.isTeacherVisible" (click)="getTeacherCourse()">
+        <a class="main-menu-point-label fit-container">teacher course</a>
+    </p>
+
+    <p class="main-menu-point" [hidden]="!this.isAdminVisible" (click)="createCourse()">
+        <a class="main-menu-point-label fit-container">Create course</a>
+    </p>
+
+    <p class="main-menu-point" [hidden]="!this.isAdminVisible" (click)="getUsers()">
+        <a class="main-menu-point-label fit-container">view all users</a>
+    </p>
+
+    <p class="main-menu-point" (click)="doSignout()">
+        <a class="main-menu-point-label fit-container">Signout</a>
+    </p>
+
+</div>

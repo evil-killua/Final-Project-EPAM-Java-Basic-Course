@@ -1,0 +1,22 @@
+<table class="table table-striped form-table" border="1">
+    <thead>
+        <tr>
+            <th>first Name</th>
+            <th>lastName</th>
+            <th>email</th>
+            <th>phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{data.firstName}}</td>
+            <td>{{data.lastName}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.phone}}</td>
+            <!--<td> 
+                <button mat-raised-button (click)="userInfo(user)" class="btn btn-info">user info</button>
+            </td>-->
+        </tr>
+    </tbody>
+</table>
+<button (click)="onNoClick()">close</button>

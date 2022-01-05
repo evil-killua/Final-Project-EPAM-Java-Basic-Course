@@ -1,0 +1,40 @@
+<h2 class="form-title">user course</h2>
+
+<table class="table table-striped form-table" border="1" *ngIf="loaded">
+    <thead>
+        <tr>
+            <td>#</td>
+            <th>course name</th>
+            <th>teacher name</th>
+            <th>description</th>
+            <th>start of courses</th>
+            <th>end of courses</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courses; let i = index">
+            <td class="count"></td>
+            <td>{{courses[i].courseName}}</td>
+            <td>{{courses[i].teacherName}}</td>
+            <td>{{courses[i].description}}</td>
+            <td>{{courses[i].startOfCourses}}</td>
+            <td>{{courses[i].endOfCourses}}</td>
+            <td>
+                <button (click)="viewPresence(courses[i].id!)" class="btn btn-info">view presence</button> 
+            </td>
+            <td *ngIf="archives[i].graduationGrade! > 0; else elseBlock">
+                <button (click)="viewFinalMark(i)" class="btn btn-info">give a final mark</button>
+            </td>
+
+            <ng-template #elseBlock>
+                <td>
+                    <button (click)="deduct(courses[i])" class="btn btn-info">leave course</button>
+                </td>
+            </ng-template>
+
+        </tr>
+    </tbody>
+</table>
+
+<div  *ngIf="!loaded">loading ...</div>
+

@@ -1,0 +1,65 @@
+<h3 class="form-title">Course info</h3>
+
+<div class="data-container form-table" *ngIf="loaded">
+
+    <div class="fit-container data-row">
+        <label><b>course name:  </b></label> {{course.courseName}}
+    </div>
+
+    <div class="fit-container data-row">
+        <label><b>description:  </b></label> {{course.description}}
+    </div>
+
+    <div class="fit-container data-row">
+        <label><b>startOfCourses:  </b></label> {{course.startOfCourses}}
+    </div>
+
+    <div class="fit-container data-row">
+        <label><b>endOfCourses:  </b></label> {{course.endOfCourses}}
+    </div>
+
+    <p>list of student</p>
+    <table class="table table-striped form-table" border="1">
+        <thead>
+            <tr>
+                <td>#</td>
+                <th>first Name</th>
+                <th>lastName</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users" >
+                <td class="count"></td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td> 
+                    <button mat-raised-button (click)="userInfo(user)" class="btn btn-info">user info</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>list of topic</p>
+    <table class="table table-striped form-table" border="1">
+        <thead>
+            <tr>
+                <td>#</td>
+                <th>topic name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let topic of courseTopicList" >
+                <td class="count"></td>
+                <td>{{topic.topicName}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <button mat-raised-button (click)="teacherCourse()" class="btn btn-info">teacher course</button>
+    <button mat-raised-button *ngIf="!complete" (click)="markPresence()" class="btn btn-info">mark presence</button>
+    <button mat-raised-button (click)="watchAttendance()" class="btn btn-info">watch attendance</button>
+    <button mat-raised-button *ngIf="complete" (click)="finalMark()" class="btn btn-info">give a final mark</button>
+</div>
+
+<div  *ngIf="!loaded">loading ...</div>
+

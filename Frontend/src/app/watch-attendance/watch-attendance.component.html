@@ -1,0 +1,44 @@
+<h2 class="form-title">выбор темы</h2>
+
+<select
+id="second"
+class="tickets-form-selector"
+[(ngModel)]="selectTopic"
+(change)="onChangeTopic(selectTopic)"
+> 
+    <option value="Выберите тему занятия">Выберите тему занятия</option>
+    <option *ngFor="let topic of loadTopic">
+        {{topic}}
+    </option>
+</select>
+
+<p [style.visibility]="(dateOfStudy === 'no date') ? 'visible' : 'hidden' ">
+    this topic has not been studied yet
+</p>
+
+<p [style.visibility]="(dateOfStudy === 'no date' || dateOfStudy === '') ? 'hidden' : 'visible' ">
+    date of study {{dateOfStudy}}
+</p>
+
+    <table class="table table-striped form-table" border="1"
+    [style.visibility]="(dateOfStudy=='no date' || dateOfStudy === '') ? 'hidden' : 'visible' ">
+        <thead>
+            <tr>
+                <td>#</td>
+                <th>userName</th>
+                <th>presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let presence of presences" >
+                <td class="count"></td>
+                <td>{{presence.userName}}</td>
+                <td *ngIf="presence.userPresence">was</td>
+                <td *ngIf="!presence.userPresence">not was</td>
+            </tr>
+        </tbody>
+    </table>
+    <button mat-raised-button (click)="onClick()" class="btn btn-info">go to course info</button>
+
+
+

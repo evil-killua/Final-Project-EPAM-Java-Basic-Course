@@ -1,0 +1,210 @@
+<div class="form-container">
+  <h2 class="form-container-label">Sign up</h2>
+
+  <form class="sign-up-form" name="signupForm" #form="ngForm">
+    
+		<span class="form-status-message" style="color : red" *ngIf='error'>{{error}}</span>
+		<span class="form-status-message" style="color : green" *ngIf='success'>{{success}}</span>
+		
+    <div class="row">
+      <input
+        class="sign-up-form-text-field"
+        type="text"
+        name="username"
+        #userName="ngModel"
+        placeholder="Username"
+        required
+        minlength="1"
+        maxlength="50"
+        [class.is-invalid]="
+          userName.invalid && (userName.dirty || userName.touched)
+        "
+        [(ngModel)]="user.userName"
+      />
+
+      <div
+        *ngIf="userName.invalid && (userName.dirty || userName.touched)"
+        class="invalid-feedback"
+      >
+        <div *ngIf="userName.errors?.['required']">This field is required.</div>
+        <div *ngIf="userName.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="userName.errors?.['maxlength']">
+          This field must have at most 50 characters.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <input
+        class="sign-up-form-text-field"
+        [type]="user.showPassword ? 'text' : 'password'"
+        name="password"
+        required
+        minlength="7"
+        [class.is-invalid]="
+          userPwd.invalid && (userPwd.dirty || userPwd.touched)
+        "
+        #userPwd="ngModel"
+        placeholder="Password"
+        [(ngModel)]="user.userPwd"
+      />
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="user.showPassword = !user.showPassword"
+      >
+        <i
+          class="bi"
+          [ngClass]="{
+            'bi-eye-fill': !user.showPassword,
+            'bi-eye-slash-fill': user.showPassword
+          }"
+          >show password</i
+        >
+      </button>
+      <div
+        *ngIf="userPwd.invalid && (userPwd.dirty || userPwd.touched)"
+        class="invalid-feedback"
+      >
+        <div *ngIf="userPwd.errors?.['required']">This field is required.</div>
+        <div *ngIf="userPwd.errors?.['minlength']">
+          This field must have at least 7 characters.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <input
+        class="sign-up-form-text-field"
+        type="text"
+        name="firstName"
+        #firstName="ngModel"
+        placeholder="First name"
+        required
+        minlength="1"
+        maxlength="50"
+        [class.is-invalid]="
+          firstName.invalid && (firstName.dirty || firstName.touched)
+        "
+        [(ngModel)]="user.firstName"
+      />
+
+      <div
+        *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+        class="invalid-feedback"
+      >
+        <div *ngIf="firstName.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="firstName.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="firstName.errors?.['maxlength']">
+          This field must have at most 50 characters.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <input
+        class="sign-up-form-text-field"
+        type="text"
+        name="lastName"
+        #lastName="ngModel"
+        placeholder="Last name"
+        required
+        minlength="1"
+        maxlength="50"
+        [class.is-invalid]="
+          lastName.invalid && (lastName.dirty || lastName.touched)
+        "
+        [(ngModel)]="user.lastName"
+      />
+
+      <div
+        *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+        class="invalid-feedback"
+      >
+        <div *ngIf="lastName.errors?.['required']">This field is required.</div>
+        <div *ngIf="lastName.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="lastName.errors?.['maxlength']">
+          This field must have at most 50 characters.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <input
+        class="sign-up-form-text-field"
+        type="email"
+        name="email"
+        #email="ngModel"
+        required
+        minlength="1"
+        maxlength="50"
+        placeholder="Email"
+        appEmailValidator
+        [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+        [(ngModel)]="user.email"
+      />
+
+      <div
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="invalid-feedback"
+      >
+        <div *ngIf="email.errors?.['required']">This field is required.</div>
+        <div *ngIf="email.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="email.errors?.['maxlength']">
+          This field must have at most 50 characters.
+        </div>
+        <div
+          *ngIf="!email.errors?.['required'] && !email.errors?.['minlength'] && !email.errors?.['maxlength'] && email.errors?.['emailValidator']"
+        >
+          Invalid email format.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <input
+        class="sign-up-form-text-field"
+        type="text"
+        minlength="9"
+        maxlength="9"
+        name="phone"
+        #phone="ngModel"
+        placeholder="Phone"
+        required
+        [class.is-invalid]="phone.invalid && (phone.dirty || phone.touched)"
+        [(ngModel)]="user.phone"
+      />
+
+      <div
+        *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+        class="invalid-feedback"
+      >
+        <div *ngIf="phone.errors?.['required']">This field is required.</div>
+        <div *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength']">
+          This field must be 9 characters long.
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-sm btn-primary"
+      (click)="doSignup(form)"
+    >
+      Validate
+    </button>
+
+    <span>Have account? <a href="/signin" routerLink="/signin">Signin</a></span>
+  </form>
+</div>

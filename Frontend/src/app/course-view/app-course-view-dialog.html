@@ -1,0 +1,22 @@
+<h2 class="form-title">Ticket list</h2>
+<table class="table table-striped form-table" border="1">
+    <thead>
+        <tr>
+            <th>teacher name</th>
+            <th>course name</th>
+            <th>description</th>
+            <th>start of courses</th>
+            <th>end of courses</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{data.teacherName}}</td>
+            <td>{{data.courseName}}</td>
+            <td>{{data.description}}</td>
+            <td>{{data.startOfCourses}}</td>
+            <td>{{data.endOfCourses}}</td>
+        </tr>
+    </tbody>
+</table>
+<button (click)="onNoClick()">close</button>

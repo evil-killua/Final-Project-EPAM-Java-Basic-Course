@@ -1,0 +1,21 @@
+    <h2 class="form-title">list of student</h2>
+
+    <table class="table table-striped form-table" border="1">
+        <thead>
+            <tr>
+                <td>#</td>
+                <th>topic</th>
+                <th>presence</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let presence of presences" >
+                <td class="count"></td>
+                <td>{{presence.topicName}}</td>
+                <td *ngIf="presence.userPresence">was</td>
+                <td *ngIf="!presence.userPresence">not was</td>
+            </tr>
+        </tbody>
+    </table>
+
+<button mat-raised-button (click)="userCourse()" class="btn btn-info">user course</button>

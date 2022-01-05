@@ -1,0 +1,26 @@
+<h2 class="form-title">teacher course</h2>
+<table class="table table-striped form-table" border="1">
+    <thead>
+        <tr>
+            <td>#</td>
+            <th>course name</th>
+            <th>teacher name</th>
+            <th>start of courses</th>
+            <th>end of courses</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courses">
+            <td class="count"></td>
+            <td>{{course.courseName}}</td>
+            <td>{{course.teacherName}}</td>
+            <td>{{course.startOfCourses}}</td>
+            <td>{{course.endOfCourses}}</td>
+            <td> 
+                <button mat-raised-button (click)="courseInfo(course.id!)" class="btn btn-info">course info</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+

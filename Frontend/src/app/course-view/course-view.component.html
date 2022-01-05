@@ -1,0 +1,23 @@
+<h2 class="form-title">course list</h2>
+<table class="table table-striped form-table" border="1">
+    <thead>
+        <tr>
+            <td>#</td>
+            <th>course name</th>
+            <th>teacher name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courses">
+            <td class="count"></td>
+            <td>{{course.courseName}}</td>
+            <td>{{course.teacherName}}</td>
+            <td>
+                <button (click)="viewCourse(course)" class="btn btn-info">view</button>
+            </td>
+            <td> 
+                <button (click)="participateCourse(course)" class="btn btn-info">participate</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

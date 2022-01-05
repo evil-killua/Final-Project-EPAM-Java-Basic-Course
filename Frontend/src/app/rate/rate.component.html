@@ -1,0 +1,47 @@
+<h2 class="form-title">list of topic</h2>
+
+<div class="status-message" style="color: green" *ngIf="!error; else elseBlock">
+  {{ success }}
+</div>
+<ng-template class="status-message" style="color: red" #elseBlock>{{
+  error
+}}</ng-template>
+
+<table class="table table-striped form-table" border="1">
+  <thead>
+    <tr>
+      <td>#</td>
+      <th>user name</th>
+      <th>graduation grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let archive of archiveList">
+      <td class="count"></td>
+      <td>{{ archive.userName }}</td>
+      <td>
+        <input
+          type="number"
+          min="1"
+          max="10"
+          required
+          [(ngModel)]="archive.graduationGrade"
+        />
+        <div *ngIf="archive.graduationGrade! == null" style="color: red;">
+          This field is required.
+        </div>
+        <div
+          *ngIf="archive.graduationGrade! > 10 || archive.graduationGrade! < 0"
+            style="color: red;"
+          >
+          graduation Grade must have at least 1 and most 10
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button mat-raised-button (click)="save()" class="btn btn-info">save</button>
+<button mat-raised-button (click)="onClick()" class="btn btn-info">
+  go to course info
+</button>
